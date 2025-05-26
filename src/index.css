@@ -11,37 +11,32 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Remove background-image from :root for better control */
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
-  padding-left: 20px;
-
+  padding: 20px;
   background-image: url('/background.jpg');
   background-repeat: no-repeat;
   background-position: center center;
-
-  
   background-size: cover;
-
-  
   background-attachment: fixed;
-
-  
   background-color: #242424;
+  box-sizing: border-box;
 }
 
-
-
+/* Typography */
+h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
 a {
   font-weight: 500;
@@ -52,16 +47,12 @@ a:hover {
   color: #535bf2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* Buttons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -76,6 +67,32 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Responsive Containers */
+form,
+.viewer-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+}
+
+textarea,
+input[type="datetime-local"] {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+/* Light mode overrides */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -86,5 +103,22 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* Mobile-first adjustments */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  form,
+  .viewer-container {
+    padding: 1rem;
   }
 }
