@@ -8,33 +8,13 @@ export default function MessageForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const id = Date.now().toString(); 
-
+    const id = Date.now().toString();
     const capsule = {
-      id,
       message,
       unlockTime: unlockDate,
     };
-
-    fetch('http://localhost:3001/capsules', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(capsule),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to save capsule');
-        return res.json();
-      })
-      .then(() => {
-        navigate(`/view/${id}`); 
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('Failed to save message. Please try again.');
-      });
+    localStorage.setItem(`capsule-${id}`, JSON.stringify(capsule));
+    navigate(`/view/${id}`);
   };
 
   return (
@@ -46,9 +26,7 @@ export default function MessageForm() {
       <h2 className="text-center mb-4 text-primary">✍️ Create Your Time Capsule</h2>
 
       <div className="mb-3">
-        <label htmlFor="message" className="form-label">
-          Message
-        </label>
+        <label htmlFor="message" className="form-label">Message</label>
         <textarea
           id="message"
           className="form-control"
@@ -61,9 +39,7 @@ export default function MessageForm() {
       </div>
 
       <div className="mb-3">
-        <label htmlFor="unlockDate" className="form-label">
-          Unlock Date &amp; Time
-        </label>
+        <label htmlFor="unlockDate" className="form-label">Unlock Date & Time</label>
         <input
           type="datetime-local"
           id="unlockDate"
